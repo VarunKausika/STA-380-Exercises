@@ -85,3 +85,5 @@ Substituting in \eqref{eqn:B_1} we get,
 \begin{equation*}
 P(Diseased|Positive) = \frac{0.993*0.000025}{0.000125} = \boldmath{0.1986}
 \end{equation*}
+
+# 2. Wrangling the Billboard Top 100
