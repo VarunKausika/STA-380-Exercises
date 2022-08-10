@@ -9,9 +9,9 @@ author: "Varun Kausika"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 1. Probability practice
+\section{1. Probability practice}
 
-## Part A
+\subsection{Part A}
 
 **Given information:** 
 
@@ -48,7 +48,7 @@ Solving for x, we get,
 
 **$x = P(Yes|TC) = 0.714$** 
 
-## Part B
+\subsection{Part B}
 
 We are being asked $P(Diseased|Positive)$
 
@@ -86,5 +86,63 @@ Substituting in \eqref{eqn:B_1} we get,
 P(Diseased|Positive) = \frac{0.993*0.000025}{0.000125} = \boldmath{0.1986}
 \end{equation*}
 
-# 2. Wrangling the Billboard Top 100
+\section{2. Wrangling the Billboard Top 100}
+
+\subsection{Part A}
+
+**First, we load in the data and perform a group by on the performer and the song, with an agg function of count for the week**
+
+```{r, echo=FALSE}
+df = read.csv('billboard.csv')
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+
+grouped_df = df %>% group_by(performer, song) %>% summarize_at(vars(week), funs(length)) 
+grouped_df = grouped_df %>% rename(count=week)
+knitr::kable(head(grouped_df, 10), caption="Billboards")
+```
+
+**Finally, we sort the dataframe in descending order of counts and find the top 10 and give our table a caption:**
+
+```{r, echo= FALSE}
+top_10 = grouped_df[order(grouped_df$count, decreasing=TRUE),][1:10,]
+```
+
+```{r, echo=FALSE}
+knitr::kable(top_10, caption="Top 10 most popular songs")
+```
+
+\subsection{Part B}
+
+First we group by year and order by ascending year. Then, we remove the years 1958 and 2021 from the rows and order just to make sure. Finally, we proceed to plot the columns.
+
+```{r, echo=FALSE}
+grouped_df_2 = df %>% group_by(year) %>% summarise(n_distinct(song))
+grouped_df_2 = grouped_df_2[grouped_df_2$year!= 1958, ]
+grouped_df_2 = grouped_df_2[grouped_df_2$year!= 2021, ]
+grouped_df_2 = grouped_df_2[order(grouped_df_2$year, decreasing=FALSE),]
+```
+
+```{r plot, fig.cap='The plot shows peaks in diversity in 1965 and 2020, along with extreme lows in 2000', echo=FALSE}
+div_years = plot(grouped_df_2$year, grouped_df_2$`n_distinct(song)`, type = 'l', xlab = 'Year', ylab = 'Musical Diversity')
+```
+\subsection{Part C}
+
+First, we filter the dataframe from part A to include only those songs with weeks at least 10. Then, We do a group by on the artists. Finally, we can select those artists with a hit-count of at least 30. 
+```{r, echo=FALSE}
+ten_week_hits = grouped_df[grouped_df$count>=10,]
+```
+
+```{r, echo= FALSE}
+grouped_df_3 = ten_week_hits %>% group_by(performer) %>% summarize_at(vars(song), funs(length))
+artists_19 = grouped_df_3[grouped_df_3$song>=30, ]
+```
+```{r plot2, echo=FALSE, fig.cap='Elton John has more hits than others by quite a large margin'}
+library(ggplot2)
+ggplot(data=artists_19, aes(x=performer, y=song)) + geom_bar(stat="identity", fill="steelblue") + theme(axis.text.x=element_text(angle = -90, hjust = 0)) + labs(y = "Number of 10-week hits")
+```
+
+
 
