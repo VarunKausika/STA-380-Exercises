@@ -1,6 +1,6 @@
 ---
 title: "STA380_Exercises"
-output: md_document
+output: pdf_document
 date: "2022-08-10"
 author: "Varun Kausika"
 ---
@@ -13,23 +13,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Part A
 
-Given information: 
+**Given information:** 
 Two categories of users: 
 
 1. Truthful clicker (TC) 
 2. Random clicker (RC)
 
-*P(RC) = 0.3* 
+**Information on probablities:**
 
-P(Yes|RC) = 0.5
-
-P(No|RC) = 0.5
-
-*P(RC) = 0.7*
-
-P(Yes|TC) = x
-
-P(No|TC) = 1-x 
-
+\begin{itemize}
+\item $P(RC) = 0.3$
+\item $P(Yes|RC) = 0.5$
+\item $P(No|RC) = 0.5$
+\item $P(TC) = 0.7$
+\item $P(Yes|TC) = x$
+\item $P(No|TC) = 1-x$
+\end{itemize}
 
 *Using the Rule of Total Probability*, 
+
