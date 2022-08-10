@@ -1,5 +1,5 @@
 ---
-title: "STA380_Exercises"
+title: "STA-380 Exercises"
 output: pdf_document
 date: "2022-08-10"
 author: "Varun Kausika"
@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Part A
 
 **Given information:** 
+
 Two categories of users: 
 
 1. Truthful clicker (TC) 
@@ -28,7 +29,59 @@ Two categories of users:
 \item $P(TC) = 0.7$
 \item $P(Yes|TC) = x$
 \item $P(No|TC) = 1-x$
+\item $P(Yes) = 0.65$
+\item $P(No) = 0.35$
 \end{itemize}
 
 *Using the Rule of Total Probability*, 
 
+\begin{equation}
+P(Yes) = P(Yes, TC) + P(Yes, RC) = P(TC)*P(Yes|TC) + P(RC)*P(Yes|RC)
+\label{eqn:A_1}
+\end{equation}
+
+\begin{equation*}
+P(Yes) = 0.7x + 0.3*0.5 = 0.7x + 0.15 = 0.65
+\end{equation*}
+
+Solving for x, we get, 
+
+**$x = P(Yes|TC) = 0.714$** 
+
+## Part B
+
+We are being asked $P(Diseased|Positive)$
+
+**Given information:**
+
+\begin{itemize}
+\item $P(Positive|Diseased) = 0.993$
+\item $P(Negative|Not Diseased) = 0.9999$
+\item $P(Diseased) = 0.000025$
+\end{itemize}
+
+*According to Bayes Rule and Rule of Total Probability*,
+
+\begin{equation}
+P(Diseased|Positive) = \frac{P(Positive|Diseased)*P(Diseased)}{P(Positive)}
+\label{eqn:B_1}
+\end{equation}
+
+and, 
+
+\begin{equation}
+P(Positive) = P(Positive|Diseased)*P(Diseased) + P(Positive|Not\:Diseased)*P(Not\:Diseased)
+\label{eqn:B_2}
+\end{equation}
+
+Therefore, 
+
+\begin{equation*}
+P(Positive) = 0.993*0.000025 + 0.0001*0.999975 = 0.000125
+\end{equation*}
+
+Substituting in \eqref{eqn:B_1} we get, 
+
+\begin{equation*}
+P(Diseased|Positive) = \frac{0.993*0.000025}{0.000125} = \boldmath{0.1986}
+\end{equation*}
