@@ -1,12 +1,16 @@
 ---
 title: "STA-380 Exercises"
-output: pdf_document
+output: 
+  pdf_document:
+    extra_dependencies: ["float"]
 date: "2022-08-10"
 author: "Varun Kausika"
+header-includes:
+ \usepackage{float}
 ---
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "H", out.extra = "")
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 \section{1. Probability practice}
@@ -130,7 +134,7 @@ div_years = plot(grouped_df_2$year, grouped_df_2$`n_distinct(song)`, type = 'l',
 ```
 \subsection{Part C}
 
-First, we filter the dataframe from part A to include only those songs with weeks at least 10. Then, We do a group by on the artists. Finally, we can select those artists with a hit-count of at least 30. 
+First, we filter the dataframe from part A to include only those songs with weeks at least 10. Then, We do a group by on the artists. Finally, we can select those artists with a hit-count of at least 30. \ref{fig:10-weekhits}
 ```{r, echo=FALSE}
 ten_week_hits = grouped_df[grouped_df$count>=10,]
 ```
@@ -139,10 +143,194 @@ ten_week_hits = grouped_df[grouped_df$count>=10,]
 grouped_df_3 = ten_week_hits %>% group_by(performer) %>% summarize_at(vars(song), funs(length))
 artists_19 = grouped_df_3[grouped_df_3$song>=30, ]
 ```
+
 ```{r plot2, echo=FALSE, fig.cap='Elton John has more hits than others by quite a large margin'}
 library(ggplot2)
 ggplot(data=artists_19, aes(x=performer, y=song)) + geom_bar(stat="identity", fill="steelblue") + theme(axis.text.x=element_text(angle = -90, hjust = 0)) + labs(y = "Number of 10-week hits")
 ```
 
+\section{3. Visual Storytelling Part 1: green buildings}
 
+```{r}
+df = read.csv('greenbuildings.csv')
+df = select(df, -c(empl_gr))
+```
+
+\subsection{Outliers:}
+We are interested in finding the potential economic gains the owner could make by constructing a 15-story green building in the neighbourhood of East Cesar Chavez.
+
+**First, we remove the outliers from the dataset as mentioned by the analyst.**
+
+```{r plot3, fig.cap="It seems like occupancy below 40 percent can be removed in contrast to the 10 percent that was suggested", fig.height=2}
+par(mfrow = c(1, 3))
+boxplot(df$leasing_rate, ylab='Occupancy')
+boxplot(df$Rent, ylab='Rent')
+boxplot(df$size, ylab='Size')
+```
+
+```{r, message=FALSE, results='hide'}
+df[df$leasing_rate<40,]
+```
+**Observations:**
+\begin{enumerate}
+\item Removing outliers in occupancy below 40\% would only remove 456 rows from our dataset, so we proceed with this step.
+\item We should not remove outliers from rent, as that would shrink our dataset greatly, and also since most of the green buildings have higher rents, this would remove them entirely.
+\item We should not remove outliers from size, because size and rent are positively correlated and this might remove a significant number of green buildings as well.
+\end{enumerate}
+
+
+```{r}
+df = df[df$leasing_rate>40,]
+```
+
+\subsection{Correlation Matrix:}
+
+Now, we plot the feature correlation matrix in our dataset.
+```{r plot4, fig.cap="As we can see, rent is highly dependent on clusters", fig.height=3.5}
+library(reshape2)
+library(ggplot2)
+cormat = round(cor(df),2)
+
+reorder_cormat <- function(cormat){
+# Use correlation between variables as distance
+dd = as.dist((1-cormat)/2)
+hc = hclust(dd)
+cormat = cormat[hc$order, hc$order]
+}
+
+# Reorder the correlation matrix
+cormat = reorder_cormat(cormat)
+
+# Melt the correlation matrix
+melted_cormat = melt(cormat, na.rm = TRUE)
+# Create a ggheatmap
+ggheatmap = ggplot(melted_cormat, aes(Var2, Var1, fill = value))+
+ geom_tile(color = "white")+
+ scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+   midpoint = 0, limit = c(-1,1), space = "Lab", 
+    name="Correlation") +
+  theme_minimal()+ 
+  theme(text = element_text(size = 10)) +
+ theme(axis.text.x = element_text(angle = 90)) +
+ coord_fixed()
+# Print the heatmap
+print(ggheatmap)
+```
+\textbf{Observations:}
+
+\begin{enumerate}
+\item Rent and Cluster has a high positive correlation, because some neighbourhoods are more expensive than others. So, instead of taking the median rent throughout our dataset, we can just use the cluster rent variable.
+\item Rent and age has a mildly negative correlation, as one would expect.
+\item Rent is not correlated with green rating, LEED or Energy Star.
+\item Class A buildings are positively correlated with rent whereas Class B buildings are negatively correlated.
+\item Leasing rate is positively correlated with rent.
+\item Size and stories(can be considered correlated features) are both positively correlated to rent.
+\end{enumerate}
+
+\subsection{Scatter plots:}
+
+**Now, we draw some scatter plots to understand the relation between correlated variables.**
+
+```{r plot5, fig.cap="We can see clear patterns in the cluster rent v cluster. Some clusters have a significantly higher average rent.", fig.height=4}
+par(mfrow=c(2, 3))
+plot(df$size, df$Rent)
+plot(df$cluster, df$cluster_rent)
+plot(df$class_a, df$Rent)
+plot(df$class_b, df$Rent)
+plot(df$leasing_rate, df$Rent)
+plot(df$size, df$Rent)
+```
+**Observations**
+\begin{enumerate}
+\item Rent in Class A buildings occur more in positive class. This could be because of the positive correlation of class A buildings with green rating, size and stories. 
+\item Rent in Class B buildings occur more in negative class. The correlation of Class B with the variables is exactly opposite to that of Class A. \item This implies that the builder \textbf{MUST} aim to construct a Class A building in order to be able to charge more rent.
+\item Furthermore, the builder might want to move the building location to a cluster that falls in higher average rent bracket.
+\end{enumerate}
+
+\subsection{Density plots:}
+
+**Now, we look at the green buildings in our dataset and compare them to all the other buildings**
+
+```{r}
+greens = df[df$green_rating == 1, ]
+non_greens = df[df$green_rating == 0, ]
+```
+
+```{r plot6, fig.cap="We can see that both green buildings and non-green buildings are not normally distributed. They are shifted to the left.", fig.height=3.5}
+par(mfrow = c(1, 2))
+
+plot(density(greens$Rent), lwd = 2, col = "red", main = "Density plots", xlab = "", ylim=c(0, 0.05))
+
+set.seed(2)
+y = non_greens$Rent
+dy = density(y)
+
+lines(dy, col = "blue", lwd = 2)
+
+legend("topright", legend=c("Green", "Non-green"), col = c("red", "blue"), lty=1:1, cex=0.8)
+
+plot(density(greens$cluster_rent), lwd = 2, col = "red", main = "Density plots", xlab = "", ylim=c(0, 0.06))
+
+set.seed(2)
+y = non_greens$cluster_rent
+dy = density(y)
+
+lines(dy, col = "blue", lwd = 2)
+
+legend("topright", legend=c("Green", "Non-green"), col = c("red", "blue"), lty=1:1, cex=0.8)
+```
+**Observations:**
+
+\begin{enumerate}
+\item We can conclude that this data is skewed toward the lower rent buildings (has long tails).
+\item When comparing green and non-green buildings, the green buildings seem to peak at a slightly higher rent than the non green rents. Comparing the median values of both of these will be appropriate for the graph on the left.
+\item However, for the cluster rent graph, we see that the peak of the non-green occurs at a slightly higher rent value than the peak for the green buildings.Therefore, if we use cluster rent as our primary variable to determine income (as we said we would before), we would expect in fact a lower rent value for the greens.
+\item The cluster rent density function is not normal for either the greens or the non greens. For the non-greens, it looks more like a sum of many different bell shaped curves. This suggests that each cluster within the data has a separate normal distribution.
+\end{enumerate}
+
+\subsection{Economic Impact of Green Houses:}
+
+Economic impact could include a variety of factors in this case, namely:
+
+\begin{enumerate}
+\item \textbf{Sources of income depend on the rent being charged. Which inturn are caused by:}
+\begin{enumerate}
+\item Size of the house being rented (250,000 sqft in our case). 
+\item The neighbourhood of the house. A groupby statement is in order to find out the prices in East Cesar Chavez. On top of this, the premium rent for being green, as shown in the density plot, is pretty much no-existent. So controlling for the clusters, we can say that green houses don't do much better than non-green houses in this dataset.
+\item Age of the building. One would expect that the older the building is the lower the rent is. This is shown in the correlation plot.
+\item Appreciation of value of houses in the neighbourhood. This is something that cannot be measured by the given features. A thorough analysis of previous time series data of prices is recommended.
+\item Occupancy of the building (relevant variable here is lease.rate).
+\item Whether amenities are available or not.
+\item Whether it was renovated or not.
+\item Whether it is Class A or Class B.
+\end{enumerate}
+\item \textbf{Sources of expenditure depend on:}
+\begin{enumerate}
+\item Initial capex (100,000 in our case).
+\item Premium needed to be spent on constructing a green building (5\%).
+\item Maintainance, repairs and other charges.
+\item \textbf{NOTE: Water, Gas and Electricity charges are assumed to be paid by the tenant, hence are not included.}
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Where the Analyst went wrong:}
+
+The analyst found the impact on income in a very linear way. He did not take into account the following:
+
+\begin{enumerate}
+\item That the green buildings do not have any premium in rent after accounting for the cluster in which the buildings are.
+\item That 40\% of the occupancies are outliers, since they have a very high mean and low interquartile range.
+\item Time value of money: he has calculated the simple Payback Period of the project. The more accurate estimator of success would have been the Net Present Value.
+\item A cross sectional analysis across other buildings should have been done to compare Payback Periods instead of assuming 8 years is a decent time to recuperate costs
+\item The worst case of occupancy is not 90\%. It is much lower. As seen in the dataset many buildings have occupancies even lower than 40\%.
+\item That the cost of the buildings in the area may reduce/increase over time.
+\item Accounting for other variables which may inhibit the ability to charge high rent (eg. Class A vs B, others listed above).
+\end{enumerate}
+
+\subsubsection{Confounding variables:}
+```{r plot7, fig.cap="Some green houses show a high electricity and gas cost which goes against our intuition of what is green. The outliers can be adjusted for by removing them", fig.height=3}
+par(mfrow=c(1, 2))
+boxplot(greens$Gas_Costs, ylab = 'Gas costs', xlab='Green buildings')
+boxplot(greens$Electricity_Costs, ylab = 'Electricity costs', xlab='Green buildings')
+```
 
