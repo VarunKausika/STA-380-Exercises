@@ -259,7 +259,7 @@ non_greens = df[df$green_rating == 0, ]
 ```{r plot6, fig.cap="We can see that both green buildings and non-green buildings are not normally distributed. They are shifted to the left.", fig.height=3.5}
 par(mfrow = c(1, 2))
 
-plot(density(greens$Rent), lwd = 2, col = "red", main = "Density plots", xlab = "", ylim=c(0, 0.05))
+plot(density(greens$Rent), lwd = 2, col = "red", main = "Density plots for rent", xlab = "", ylim=c(0, 0.05))
 
 set.seed(2)
 y = non_greens$Rent
@@ -269,7 +269,7 @@ lines(dy, col = "blue", lwd = 2)
 
 legend("topright", legend=c("Green", "Non-green"), col = c("red", "blue"), lty=1:1, cex=0.8)
 
-plot(density(greens$cluster_rent), lwd = 2, col = "red", main = "Density plots", xlab = "", ylim=c(0, 0.06))
+plot(density(greens$cluster_rent), lwd = 2, col = "red", main = "Density plots for cluster-rent", xlab = "", ylim=c(0, 0.06))
 
 set.seed(2)
 y = non_greens$cluster_rent
@@ -332,5 +332,84 @@ The analyst found the impact on income in a very linear way. He did not take int
 par(mfrow=c(1, 2))
 boxplot(greens$Gas_Costs, ylab = 'Gas costs', xlab='Green buildings')
 boxplot(greens$Electricity_Costs, ylab = 'Electricity costs', xlab='Green buildings')
+```
+\section{4. Visual Storytelling part 2: Capital Metro data:}
+
+```{r}
+df = read.csv('capmetro_UT.csv')
+```
+
+```{r}
+library(dplyr)
+df['diff']= df$alighting - df$boarding
+df_hour = df %>% group_by(hour_of_day) %>% summarize(mean_boarding = mean(boarding), mean_alighting = mean(alighting), mean_temp = mean(temperature), mean_diff = mean(diff))
+```
+
+```{r plot8, fig.cap="In the campus vicinity, alighting is most common in the morning (when classes start) and boarding is most common in the evening (when classes end). Furthermore, temperature doesn't seem to have an affect on the boardings and alightings. Here, net-inflow is calculated as alightings minus boardings. Net inflow is 0 around noon (break between classes).", fig.height=3.5}
+plot(df_hour$hour_of_day, df_hour$mean_boarding, type="l",col="red", ylim = c(-80, 120), main = "Comparison of boarding vs alighting hours by hour of day", ylab='Mean number of people', xlab='Hour of day')
+lines(df_hour$hour_of_day, df_hour$mean_alighting, col="blue")
+lines(df_hour$hour_of_day, df_hour$mean_temp, col="orange")
+lines(df_hour$hour_of_day, df_hour$mean_diff, col="green")
+abline(h=0)
+legend("topright", legend=c("Boarding", "Alighting", "Temperature", "Net-Inflow"), col = c("red", "blue", "orange", "green"), lty=1:1, cex=0.8)
+
+```
+```{r plot11, fig.cap="Similar patterns are seen across months, temperatures are highest in September and gradually come down", fig.height=3, message=FALSE, warning=FALSE}
+df_month = df %>% group_by(month, hour_of_day) %>% summarize(mean_boarding = mean(boarding), mean_alighting = mean(alighting), mean_temp = mean(temperature))
+
+months = c('Sep', 'Oct', 'Nov')
+
+df_month$month = factor(df_month$month, levels=months)
+df_month = df_month[order(df_month$month), ]
+
+Legend = rep("Boarding", 48)
+alighting_legend = rep("Alighting", 48)
+temperature_legend = rep("Temperature", 48)
+
+ggplot(df_month, aes(hour_of_day)) + geom_line(aes(y=mean_boarding, color=Legend), group=1) + geom_line(aes(y=mean_alighting, color=alighting_legend), group=1) +  geom_line(aes(y=mean_temp, color=temperature_legend), group=1) + labs(x = "Month", y = "Mean number of people", title = "Comparison of boarding vs alighting means by month and hour of day") + facet_grid(~month, scale='free_y')
+```
+
+```{r}
+df_week = df %>% group_by(day_of_week) %>% summarise(mean_boarding = mean(boarding), mean_alighting = mean(alighting))
+day_labs = c("Mon","Tue","Wed","Thu","Fri","Sat","Sun") 
+df_week$day_of_week = factor(df_week$day_of_week, levels= day_labs)
+df_week = df_week[order(df_week$day_of_week), ]
+```
+
+```{r plot9, fig.cap="As we can see, the number of people boarding and alighting near campus on weekends are much lower.", fig.height=3}
+Legend = rep("Boarding", 7)
+legend_alighting = rep("Alighting", 7)
+ggplot(df_week, aes(day_of_week)) + geom_line(aes(y=mean_boarding, color = Legend), group=1) + geom_line(aes(y=mean_alighting, color = legend_alighting), group=1) + labs(x = "Day of week", y = "Mean number of people", title = "Comparison of boarding vs alighting means by day of week")
+```
+```{r plot12, fig.cap="Similar patterns are seen across months, however significantly less people seem to attend classes on Monday in September.", fig.height=3, message=FALSE, warning=FALSE}
+df_mweek = df %>% group_by(month, day_of_week) %>% summarize(mean_boarding = mean(boarding), mean_alighting = mean(alighting), mean_temp = mean(temperature))
+
+day_labs = c("Mon","Tue","Wed","Thu","Fri","Sat","Sun") 
+df_mweek$day_of_week = factor(df_mweek$day_of_week, levels= day_labs)
+df_week = df_week[order(df_mweek$day_of_week), ]
+
+months = c('Sep', 'Oct', 'Nov')
+
+df_mweek$month = factor(df_mweek$month, levels=months)
+df_month = df_month[order(df_mweek$month), ]
+
+Legend = rep("Boarding", 21)
+alighting_legend = rep("Alighting", 21)
+temperature_legend = rep("Temperature", 21)
+
+ggplot(df_mweek, aes(day_of_week)) + geom_line(aes(y=mean_boarding, color=Legend), group=1) + geom_line(aes(y=mean_alighting, color=alighting_legend), group=1) +  geom_line(aes(y=mean_temp, color=temperature_legend), group=1) + labs(x = "Month", y = "Mean number of people", title = "Comparison of boarding vs alighting means by month and day of week") + facet_grid(~month, scale='free_y') + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+```{r plot10, fig.cap="There seem to be more students coming in October compared to November and September. This is because of Thanksgiving holidays in November and since college starts in August, students might not immediately be using the buses on a regular basis in September.", fig.height=3, warning=FALSE, message=FALSE}
+months = c('Sep', 'Oct', 'Nov')
+
+df_month = df %>% group_by(month) %>% summarize(mean_boarding = mean(boarding), mean_alighting = mean(alighting))
+df_month$month = factor(df_month$month, levels=months)
+df_month = df_month[order(df_month$month), ]
+
+Legend = rep("Boarding", 3)
+alighting_legend = rep("Alighting", 3)
+
+ggplot(df_month, aes(month)) + geom_line(aes(y=mean_boarding, color=Legend), group=1) + geom_line(aes(y=mean_alighting, color=alighting_legend), group=1) + labs(x = "Month", y = "Mean number of people", title = "Comparison of boarding vs alighting means by month") + theme(legend.position = "right")
 ```
 

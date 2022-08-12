@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.19)  11 AUG 2022 13:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.19)  12 AUG 2022 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -671,17 +671,57 @@ File: STA380_Exercises_files/figure-latex/plot7-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot7-1.pdf  used 
 on input line 393.
 (pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
-[8] [9 <./STA380_Exercises_files/figure-latex/plot7-1.pdf>] (STA380_Exercises.a
-ux)
+[8]
+<STA380_Exercises_files/figure-latex/plot8-1.pdf, id=152, 469.755pt x 252.945pt
+>
+File: STA380_Exercises_files/figure-latex/plot8-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot8-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot8-1.pdf  used 
+on input line 398.
+(pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
+<STA380_Exercises_files/figure-latex/plot11-1.pdf, id=153, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot11-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot11-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot11-1.pdf  used
+ on input line 401.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[9 <./STA380_Exercises_files/figure-latex/plot7-1.pdf> <./STA380_Exercises_file
+s/figure-latex/plot8-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot9-1.pdf, id=173, 469.755pt x 216.81pt>
+
+File: STA380_Exercises_files/figure-latex/plot9-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot9-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot9-1.pdf  used 
+on input line 405.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot12-1.pdf, id=174, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot12-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot12-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot12-1.pdf  used
+ on input line 408.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[10 <./STA380_Exercises_files/figure-latex/plot11-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot9-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot10-1.pdf, id=191, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot10-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot10-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot10-1.pdf  used
+ on input line 412.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[11 <./STA380_Exercises_files/figure-latex/plot12-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot10-1.pdf>] (STA380_Exercises.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 13916 strings out of 478659
- 225168 string characters out of 2845920
- 564596 words of memory out of 3000000
- 31607 multiletter control sequences out of 15000+600000
+ 13975 strings out of 478659
+ 227557 string characters out of 2845920
+ 565642 words of memory out of 3000000
+ 31653 multiletter control sequences out of 15000+600000
  457663 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,7n,77p,1015b,516s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -698,11 +738,11 @@ varun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/v
 arun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/va
 run/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/va
 run/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on STA380_Exercises.pdf (9 pages, 1689717 bytes).
+Output written on STA380_Exercises.pdf (11 pages, 1718520 bytes).
 PDF statistics:
- 270 PDF objects out of 1000 (max. 8388607)
- 77 named destinations out of 1000 (max. 500000)
- 30876 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 320 PDF objects out of 1000 (max. 8388607)
+ 85 named destinations out of 1000 (max. 500000)
+ 30909 words of extra memory for PDF output out of 35830 (max. 10000000)
 
 
 ! pdflatex: major issue: So far, you have not checked for MiKTeX updates.
