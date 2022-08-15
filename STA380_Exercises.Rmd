@@ -614,7 +614,7 @@ https://www.bankrate.com/investing/best-etfs/
 https://etfdb.com/compare/lowest-ytd-returns/
 
 
-\section{Clustering and PCA}
+\section{6. Clustering and PCA}
 ```{r include=FALSE}
 rm(list = ls())
 
@@ -626,30 +626,28 @@ library(magrittr)
 ```
 
 
-**Sample Data**
 ```{r echo=FALSE}
 wine <- read.csv('wine.csv')
- head(wine)
 
 ```
 
-**Data Summary**
+\subsection{Data Summary}
 ```{r echo=FALSE}
 summary(wine)
 ```
 
-** PCA using prcomp that uses the singular value decomposition (SVD)**
+\subsection{PCA}
+
+We used prcomp that uses the singular value decomposition (SVD).
 ```{r echo=FALSE}
 # PCA
 PCAwine <- prcomp(wine[,-(12:13)], scale=TRUE)
 summary(PCAwine)
 ```
-** Interpreting the components **
-```{r echo=FALSE}
-round(PCAwine$rotation[,1:2],2)
-```
+\subsection{Interpreting the loadings}
 
-**Summary of the loadings**
+Summary
+The loadings are as follows
 ```{r echo=FALSE}
 # create a tidy summary of the loadings
 loadings_summary = PCAwine$rotation %>%
@@ -659,22 +657,30 @@ loadings_summary = PCAwine$rotation %>%
 loadings_summary
 ```
 
+PC1 is always the axis that explains more variability among the samples included in the test. PC2 is the second axis.
+```{r echo=FALSE}
+knitr::kable(round(PCAwine$rotation[,1:2],2), caption="Weights on the components")
+```
 ```{r echo=FALSE}
 # PC1 seems to give more positive loadings to sulfur dioxide and residual sugar while chlorides, sulphates & acidity have negative loadings
-loadings_summary %>%
+pc1_summary = loadings_summary %>%
   select(Properties, PC1) %>%
   arrange(desc(PC1)) %>%
   mutate(PC1 = round(PC1,2))
+
+knitr::kable(pc1_summary, caption="Summary of PC1")
 ```
 
-** PC1 seems to give more positive loadings to sulfur dioxide and residual sugar while chlorides, sulphates & acidity have negative loadings**
+**PC1 seems to give more positive loadings to sulfur dioxide and residual sugar while chlorides, sulphates & acidity have negative loadings**
 
 ```{r echo=FALSE}
 # PC2 gives more positive loading to density and high negative to alcohol content
-loadings_summary %>%
+pc2_summary = loadings_summary %>%
   select(Properties, PC2) %>%
   arrange(desc(PC2)) %>%
   mutate(PC2 = round(PC2,2))
+
+knitr::kable(pc2_summary, caption="Summary of PC2")
 ```
 **PC2 gives more positive loading to density and high negative to alcohol content**
 
@@ -685,42 +691,37 @@ wine = merge(wine, PCAwine$x[,1:2], by="row.names")
 wine = rename(wine, Show = Row.names)
 
 ```
-** PC space, i.e. the space of summary variables we've created**
 
 ```{r echo=FALSE}
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
 
 ```
 
-```{r echo=FALSE}
+```{r plot19, fig.cap="PC space, i.e. the space of summary variables we've created", fig.height=3, echo=FALSE}
 wine %>% ggplot(aes(x = PC1, y = PC2)) + geom_point()
-# We can see that there are two clusters emerging. One to the left having more negative PC1 & another to the right having more positive PC1
-# As we do not have access to the wine color, we cannot say exactly which of these two clusters correspond to red & White wine
-# However, the difference in the loadings for each feature by the principal components implies that these two clusters are distinct
 
 ```
 
-* We can see that there are two clusters emerging. One to the left having more negative PC1 & another to the right having more positive PC1
-* As we do not have access to the wine color, we cannot say exactly which of these two clusters correspond to red & White wine
-* However, the difference in the loadings for each feature by the principal components implies that these two clusters are distinct
+\begin{itemize}
+\item We can see that there are two clusters emerging. One to the left having more negative PC1 and another to the right having more positive PC1.
+\item As we do not have access to the wine color, we cannot say exactly which of these two clusters correspond to red and White wine.
+\item However, the difference in the loadings for each feature by the principal components implies that these two clusters are distinct.
+\end{itemize}
+ 
+\subsection{Categorize quality}
 
-
-**Categorize quality **
+Here we predict and categorize quality.
 ```{r echo=FALSE}
-# Predicting quality
-# Categorize quality 
 wine$Q_score <- NA
 wine[wine$quality <= 5,]$Q_score <- 'Low Quality'
 wine[wine$quality > 5,]$Q_score <- 'High Quality'
-table(wine$Q_score)
+knitr::kable(table(wine$Q_score), caption="Quality")
 ```
 
-```{r echo=FALSE}
+```{r plot20, fig.cap="It doesn't look like the principal components can do a good job of separating high and low quality wines", fig.height=3, echo=FALSE}
 wine %>% ggplot(aes(x = PC1, y = PC2, col = Q_score)) + geom_point()
 
 ```
-
-**It doesn't look like the principal components can do a good job of separating high & low quality wines.**
 
 ```{r echo=FALSE}
 # k-Means clustering
@@ -744,36 +745,45 @@ clust1 = kmeans(X, 2, nstart=25)
 
 ```
 
-**Clusters**
+\subsection{Clusters}
 
-```{r echo=FALSE}
-# What are the clusters?
-clust1$center[1,]*sigma + mu # More sulfur dioxide & sugar compared to cluster 2
-clust1$center[2,]*sigma + mu # More acidity, chlorides & sulphates compared to cluster 1
-
+```{r echo=FALSE, warning=FALSE}
+knitr::kable(clust1$center[1,]*sigma + mu, caption="Cluster center 1")
+```
+```{r, warning=FALSE}
+knitr::kable(clust1$center[2,]*sigma + mu, caption="Cluster center 2")
 ```
 
 
+**Observations**
+\begin{itemize}
+\item More sulfur dioxide and sugar compared to cluster 2.
+\item More acidity, chlorides and sulphates compared to cluster 1.
+\end{itemize}
+
+\subsection{How close the clusters are to each other}
+```{r echo=FALSE}
+knitr::kable(sort(clust1$center[1,] - clust1$center[2,]), caption="Cluster center-1 to cluster center-2")
+```
+This shows that the cluster centers are quite close to each other.
+
+\subsection{Table clusters}
 
 ```{r echo=FALSE}
-sort(clust1$center[1,] - clust1$center[2,])
+knitr::kable(table(clust1$cluster, wine$color), caption="Confusion Matrix")
 ```
-**Table clusters**
-
-```{r echo=FALSE}
-table(clust1$cluster, wine$color)
-```
-
 ```{r echo=FALSE}
 wine$dist1 <- sqrt(rowSums((sweep(wine[,-(12:13)], 2, (clust1$center[1,] *sigma + mu)))^2))
 wine$dist2 <- sqrt(rowSums((sweep(wine[,-(12:14)], 2, (clust1$center[2,]*sigma + mu)))^2))
 
-head(wine)
+knitr::kable(head(select(wine, c(dist1, dist2))), caption="First 10 rows of PCs for wine data")
 
 ```
 
-**Using the two most contrasting features for the 2 clusters as x & y to visualize**
-```{r echo=FALSE}
+\subsection{Visualization}
+
+\subsubsection{Contrasting features}
+```{r plot21, fig.cap="Using the two most contrasting features for the 2 clusters as x and y to visualize", fig.height=3, echo=FALSE}
 # Using the two most contrasting features for the 2 clusters as x & y to visualize
 wine %>% ggplot(aes(x = total.sulfur.dioxide, y = volatile.acidity, col = factor(clust1$cluster))) + geom_point()
 # The 2 clusters are pretty well separated. And as these two clusters differ widely in their chemical characteristics,
@@ -781,8 +791,8 @@ wine %>% ggplot(aes(x = total.sulfur.dioxide, y = volatile.acidity, col = factor
 
 ```
 
-**PLot for High and Low Quality Wine**
-```{r echo=FALSE}
+\subsubsection{Plot for High and Low Quality Wine}
+```{r plot22, fig.cap="We can see that the features are not very discriminative of quality.", fig.height=3, echo=FALSE}
 wine$Q_score <- NA
 wine[wine$quality <= 5,]$Q_score <- 'Low Quality'
 wine[wine$quality > 5,]$Q_score <- 'High Quality'
@@ -790,38 +800,36 @@ wine %>% ggplot(aes(x = total.sulfur.dioxide, y = volatile.acidity, col = factor
 
 ```
 
-```{r echo=FALSE}
+```{r plot23, echo=FALSE, fig.cap="Interaction of red and white wine variables individually in the plot", fig.height=3}
 wine %>% ggplot(aes(x = dist1, y = dist2, col = color)) +
   geom_point() +
   facet_grid(cols = vars(color))
 
 ```
-```{r echo=FALSE}
+```{r plot24, fig.cap="Interaction of red and white wine variables in the plot", fig.height=3}
 wine %>% ggplot(aes(x = dist1, y = dist2, col = color)) +
   geom_point()
 
 ```
 
-```{r echo=FALSE}
+```{r plot25, echo=FALSE, fig.cap="Interaction of red and white wine variables wrt quality parameter in the plot.", fig.height=3}
 wine %>% ggplot(aes(x = dist1, y = dist2, col = quality)) +
-  geom_point() +
+  geom_point() + 
+  theme(axis.text.x = element_text(angle=-90, hjust=.2)) +
   facet_grid(cols = vars(quality))
 
 ```
+\subsection{Summary}
 
-```{r echo=FALSE}
-wine %>% ggplot(aes(x = dist1, y = dist2, col = quality)) +
-  geom_point() + scale_colour_gradientn(colours = myPalette(100), limits=c(3, 9))
+\begin{itemize}
+\item PCA is the best dimensionality reduction technique makes more sense to us for this data.
+\item PCA Counteracts the issues of high dimensional data.
+\item PCA improves performance at a very low cost of model accuracy.
+\end{itemize}
 
-```
+\section{7. Market segmentation}
 
-** Summary**
-
-* PCA is the best dimensionality reduction technique makes more sense to me for this data
-* PCA Counteracts the issues of high-dimensional data
-* PCA improves performance at a very low cost of model accuracy
-
-Correlation Plot
+\subsection{Correlation Plot}
 ```{r, include=FALSE}
 library(ggplot2)
 library(ggthemes)
@@ -838,12 +846,10 @@ social_marketing_raw <- read.csv(soical_marketing_file)
 social_marketing <- read.csv(soical_marketing_file)
 ```
 
-```{r}
+```{r plot27, fig.cap="The plot is showing us that college uni and online gaming are correlated. We also see that health nutrition and personal fitness are correlated as well."}
 cor = round(cor(social_marketing_raw[,2:37]), 2)
 corrplot(cor, method="square")
 ```
-
-The plot at first glance will just show us what how many and what variables are showing a correlation. We see that many of the variables are correlated. For example, the plot is showing us that college uni and online gaming are correlated. We also see that health nutrition and personal fitness are correlated as well.
 
 We can use the principal component analysis to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
 
@@ -863,7 +869,7 @@ sigma = attr(scaled_var,"scaled:scale")
 
 We've centered and scaled the data and extracted them which will be the attributes. 
 
-```{r}
+```{r plot28, results='hide', fig.cap="Looking at the 10th principal component we can see that roughly 64.6 percent of the fraction of variance is explained. Using the Kaiser Criterion we can drop all Eigen values under 1.0.", fig.height=3}
 
 pca = prcomp(social_marketing_raw[,2:32], scale=TRUE, center = TRUE)
 
@@ -877,9 +883,8 @@ plot(cumsum(pca_2), xlab = "Principal Component",
 cumsum(pca_2)[10]
 ```
 
-Looking at the 10th principal component we can see that roughly 64.6% of the fraction of variance is explained. Using the Kaiser Criterion we can drop all Eigen values under 1.0. 
 
-```{r}
+```{r plot29, fig.cap="Visualization of the clusters. Using the elbow method we've determine the number of clusters. We've decided to move forward with 10 clusters.", fig.height=4}
 set.seed(123)
 
 k.max = 15
@@ -891,10 +896,7 @@ social_cluster1 = cbind(social_marketing, cluster1$cluster)
 
 plotcluster(social_marketing[,2:32], cluster1$cluster)
 ```
-
-Using the elbow method we've determine the number of clusters. We've decided to move forward with 10 clusters. 
-
-
+\subsection{Summary of the principal components}
 ```{r}
 
 social_cluster1_main = as.data.frame(cbind(cluster1$center[1,]*sigma + mu, 
@@ -923,7 +925,7 @@ names(social_cluster1_main) <- c('Cluster_1',
 
 ```
 
-```{r}
+```{r plot30, fig.cap="Cluster 1 primarily composed with people who have interest in current events, traveling and politics.", fig.height=3}
 social_cluster1_main$type = row.names(social_cluster1_main)
 #Cluster 1
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_1) , y=Cluster_1)) +
@@ -933,9 +935,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_1) , y=Cluster_1)) +
   labs(title="Cluster 1",
        x ="Category", y = "Centre Values")
 ```
-Cluster 1 primarily composed with people who have interest in current_events, traveling and politics. 
 
-```{r}
+```{r plot31, fig.cap="Cluster 2 primarily composed with people who have interest in shopping, current events, college uni.", fig.height=3}
 #Cluster 2 
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_2) , y=Cluster_2)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -944,9 +945,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_2) , y=Cluster_2)) +
   labs(title="Cluster 2",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 2 primarily composed with people who have interest in shopping, current_events, college_uni. 
 
-```{r}
+```{r plot32, fig.cap="Cluster 3 emphasized people who have interest in dating then followed by fashion.", fig.height=3}
 #Cluster 3
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_3) , y=Cluster_3)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -955,9 +955,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_3) , y=Cluster_3)) +
   labs(title="Cluster 3",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 3 emphasized people who have interest in dating then followed by fashion.
 
-```{r}
+```{r plot33, fig.cap="Cluster 4 primarily composed of people who have interest in sports fandom, religion, and parenting.", fig.height=3}
 #Cluster 4
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_4) , y=Cluster_4)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -966,10 +965,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_4) , y=Cluster_4)) +
   labs(title="Cluster 4",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 4 primarily composed of people who have interest in sports_fandom, relition, and parenting.
 
-
-```{r}
+```{r plot34, fig.cap="Cluster 5 primarily composed of people who have interest in cooking, fashion and beauty. ", fig.height=3}
 #Cluster 5
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_5) , y=Cluster_5)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -978,10 +975,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_5) , y=Cluster_5)) +
   labs(title="Cluster 5",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 5 primarily composed of people who have interest in cooking, fashion and beauty. 
 
-
-```{r}
+```{r plot35, fig.cap="Cluster 6 primarily composed of people who have interest in college unit, online gaming and sports playing.", fig.height=3}
 #Cluster 6
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_6) , y=Cluster_6)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -990,9 +985,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_6) , y=Cluster_6)) +
   labs(title="Cluster 6",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 6 primarily composed of people who have interest in college_unit, online gaming and sports_playing. 
 
-```{r}
+```{r plot36, fig.cap="Cluster 7 primarily composed of people who have interest in art, tv film, and current events.", fig.height=3}
 #Cluster 7
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_7) , y=Cluster_7)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -1001,9 +995,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_7) , y=Cluster_7)) +
   labs(title="Cluster 7",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 7 primarily composed of people who have interest in art, tv_film, and current_events. 
 
-```{r}
+```{r plot37, fig.cap="Cluster 8 primarily composed of people who have interest in news, politics, and automotive.", fig.height=3}
 #Cluster 8
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_8) , y=Cluster_8)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -1012,10 +1005,9 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_8) , y=Cluster_8)) +
   labs(title="Cluster 8",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 8 primarily composed of people who have interest in news, politics, and automotive. 
 
 
-```{r}
+```{r plot38, fig.cap="Cluster 9 primarily composed of people who have interest in politics, travel, computers.", fig.height=3}
 #Cluster 9
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_9) , y=Cluster_9)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -1024,9 +1016,8 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_9) , y=Cluster_9)) +
   labs(title="Cluster 9",
        x ="Category", y = "Cluster Centre")
 ```
-Cluster 9 primarily composed of people who have interest in politics, travel, computers. 
 
-```{r}
+```{r plot39, fig.cap="Cluster 10 primarily composed of people who have interest in personal fitness, cooking, outdoors.", fig.height=3}
 #Cluster 10
 ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_10) , y=Cluster_10)) +
   geom_bar(stat="identity", position ="dodge") + 
@@ -1035,6 +1026,7 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_10) , y=Cluster_10)) 
   labs(title="Cluster 10",
        x ="Category", y = "Cluster Centre") 
 ```
-Cluster 10 primarily composed of people who have interest in personal_fitness, cooking, outdoors.
 
 K-Means clustering can allow us to identify the different market segments. In this case, we used 10 clusters to describe the unique market segments that the dataset has. These can then be used to create marketing campaigns. 
+
+

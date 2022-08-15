@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.19)  15 AUG 2022 10:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.19)  15 AUG 2022 12:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -786,257 +786,178 @@ Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot18-1.pdf  used
 (pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
 [18 <./STA380_Exercises_files/figure-latex/plot17-2.pdf> <./STA380_Exercises_fi
 les/figure-latex/plot18-1.pdf>] [19] [20]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-35-1.pdf, id=327, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-35-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-35-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-35-1
-.pdf  used on input line 827.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<STA380_Exercises_files/figure-latex/plot19-1.pdf, id=331, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot19-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot19-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot19-1.pdf  used
+ on input line 832.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
 [21]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-37-1.pdf, id=332, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-37-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-37-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-37-1
-.pdf  used on input line 851.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[22 <./STA380_Exercises_files/figure-latex/unnamed-chunk-35-1.pdf>] [23 <./STA3
-80_Exercises_files/figure-latex/unnamed-chunk-37-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-45-1.pdf, id=351, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-45-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-45-1
-.pdf  used on input line 927.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<STA380_Exercises_files/figure-latex/plot20-1.pdf, id=338, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot20-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot20-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot20-1.pdf  used
+ on input line 861.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[22 <./STA380_Exercises_files/figure-latex/plot19-1.pdf>] [23 <./STA380_Exercis
+es_files/figure-latex/plot20-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot21-1.pdf, id=364, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot21-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot21-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot21-1.pdf  used
+ on input line 989.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
 [24]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-46-1.pdf, id=356, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-46-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-46-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-46-1
-.pdf  used on input line 931.
+<STA380_Exercises_files/figure-latex/plot22-1.pdf, id=374, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot22-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot22-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot22-1.pdf  used
+ on input line 994.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot23-1.pdf, id=375, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot23-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot23-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot23-1.pdf  used
+ on input line 998.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot24-1.pdf, id=376, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot24-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot24-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot24-1.pdf  used
+ on input line 1001.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[25 <./STA380_Exercises_files/figure-latex/plot21-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot22-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot25-1.pdf, id=397, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot25-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot25-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot25-1.pdf  used
+ on input line 1005.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[26 <./STA380_Exercises_files/figure-latex/plot23-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot24-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot27-1.pdf, id=414, 469.755pt x 325.215p
+t>
+File: STA380_Exercises_files/figure-latex/plot27-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot27-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot27-1.pdf  used
+ on input line 1020.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[25 <./STA380_Exercises_files/figure-latex/unnamed-chunk-45-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-47-1.pdf, id=367, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-47-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-47-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-47-1
-.pdf  used on input line 933.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[26 <./STA380_Exercises_files/figure-latex/unnamed-chunk-46-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-48-1.pdf, id=377, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-48-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-48-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-48-1
-.pdf  used on input line 935.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27 <./STA380_Exercises_files/figure-latex/unnamed-chunk-47-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-49-1.pdf, id=387, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-49-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-49-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-49-1
-.pdf  used on input line 937.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[28 <./STA380_Exercises_files/figure-latex/unnamed-chunk-48-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-50-1.pdf, id=397, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-50-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-50-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-50-1
-.pdf  used on input line 939.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[29 <./STA380_Exercises_files/figure-latex/unnamed-chunk-49-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-52-1.pdf, id=408, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-52-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-52-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-52-1
-.pdf  used on input line 956.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[30 <./STA380_Exercises_files/figure-latex/unnamed-chunk-50-1.pdf>] [31 <./STA3
-80_Exercises_files/figure-latex/unnamed-chunk-52-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-54-1.pdf, id=429, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-54-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-54-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-54-1
-.pdf  used on input line 995.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<STA380_Exercises_files/figure-latex/unnamed-chunk-55-1.pdf, id=430, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-55-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-55-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-55-1
-.pdf  used on input line 1005.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[32 <./STA380_Exercises_files/figure-latex/unnamed-chunk-54-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-57-1.pdf, id=440, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-57-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-57-1
-.pdf  used on input line 1034.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1034--1037
-[][]
- []
-
-[33 <./STA380_Exercises_files/figure-latex/unnamed-chunk-55-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-58-1.pdf, id=450, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-58-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-58-1
-.pdf  used on input line 1038.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1038--1041
-[][]
- []
-
-[34 <./STA380_Exercises_files/figure-latex/unnamed-chunk-57-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-59-1.pdf, id=461, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-59-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-59-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-59-1
-.pdf  used on input line 1042.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1042--1045
-[][]
- []
-
-[35 <./STA380_Exercises_files/figure-latex/unnamed-chunk-58-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-60-1.pdf, id=472, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-60-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-60-1
-.pdf  used on input line 1046.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1046--1049
-[][]
- []
-
-[36 <./STA380_Exercises_files/figure-latex/unnamed-chunk-59-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-61-1.pdf, id=483, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-61-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-61-1
-.pdf  used on input line 1050.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1053
-[][]
- []
-
-[37 <./STA380_Exercises_files/figure-latex/unnamed-chunk-60-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-62-1.pdf, id=495, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-62-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-62-1
-.pdf  used on input line 1054.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1054--1057
-[][]
- []
-
-[38 <./STA380_Exercises_files/figure-latex/unnamed-chunk-61-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-63-1.pdf, id=506, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-63-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-63-1
-.pdf  used on input line 1058.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1058--1061
-[][]
- []
-
-[39 <./STA380_Exercises_files/figure-latex/unnamed-chunk-62-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-64-1.pdf, id=517, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-64-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-64-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-64-1
-.pdf  used on input line 1062.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1062--1065
-[][]
- []
-
-[40 <./STA380_Exercises_files/figure-latex/unnamed-chunk-63-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-65-1.pdf, id=528, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-65-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-65-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-65-1
-.pdf  used on input line 1066.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1066--1069
-[][]
- []
-
-[41 <./STA380_Exercises_files/figure-latex/unnamed-chunk-64-1.pdf>]
-<STA380_Exercises_files/figure-latex/unnamed-chunk-66-1.pdf, id=539, 469.755pt 
-x 325.215pt>
-File: STA380_Exercises_files/figure-latex/unnamed-chunk-66-1.pdf Graphic file (
-type pdf)
-<use STA380_Exercises_files/figure-latex/unnamed-chunk-66-1.pdf>
-Package pdftex.def Info: STA380_Exercises_files/figure-latex/unnamed-chunk-66-1
-.pdf  used on input line 1070.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1070--1073
-[][]
- []
-
-[42 <./STA380_Exercises_files/figure-latex/unnamed-chunk-65-1.pdf>] [43 <./STA3
-80_Exercises_files/figure-latex/unnamed-chunk-66-1.pdf>] (STA380_Exercises.aux)
+[27 <./STA380_Exercises_files/figure-latex/plot25-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot28-1.pdf, id=427, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot28-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot28-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot28-1.pdf  used
+ on input line 1031.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[28 <./STA380_Exercises_files/figure-latex/plot27-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot29-1.pdf, id=440, 469.755pt x 252.945p
+t>
+File: STA380_Exercises_files/figure-latex/plot29-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot29-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot29-1.pdf  used
+ on input line 1035.
+(pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
+[29 <./STA380_Exercises_files/figure-latex/plot28-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot29-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot30-1.pdf, id=458, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot30-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot30-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot30-1.pdf  used
+ on input line 1064.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot31-1.pdf, id=459, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot31-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot31-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot31-1.pdf  used
+ on input line 1068.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[30 <./STA380_Exercises_files/figure-latex/plot30-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot32-1.pdf, id=471, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot32-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot32-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot32-1.pdf  used
+ on input line 1072.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot33-1.pdf, id=472, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot33-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot33-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot33-1.pdf  used
+ on input line 1076.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[31 <./STA380_Exercises_files/figure-latex/plot31-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot32-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot34-1.pdf, id=492, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot34-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot34-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot34-1.pdf  used
+ on input line 1080.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot35-1.pdf, id=493, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot35-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot35-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot35-1.pdf  used
+ on input line 1084.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[32 <./STA380_Exercises_files/figure-latex/plot33-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot34-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot36-1.pdf, id=512, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot36-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot36-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot36-1.pdf  used
+ on input line 1088.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot37-1.pdf, id=513, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot37-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot37-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot37-1.pdf  used
+ on input line 1092.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[33 <./STA380_Exercises_files/figure-latex/plot35-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot36-1.pdf>]
+<STA380_Exercises_files/figure-latex/plot38-1.pdf, id=532, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot38-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot38-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot38-1.pdf  used
+ on input line 1096.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+<STA380_Exercises_files/figure-latex/plot39-1.pdf, id=533, 469.755pt x 216.81pt
+>
+File: STA380_Exercises_files/figure-latex/plot39-1.pdf Graphic file (type pdf)
+<use STA380_Exercises_files/figure-latex/plot39-1.pdf>
+Package pdftex.def Info: STA380_Exercises_files/figure-latex/plot39-1.pdf  used
+ on input line 1100.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[34 <./STA380_Exercises_files/figure-latex/plot37-1.pdf> <./STA380_Exercises_fi
+les/figure-latex/plot38-1.pdf>] [35 <./STA380_Exercises_files/figure-latex/plot
+39-1.pdf>] (STA380_Exercises.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14400 strings out of 478659
- 244891 string characters out of 2845920
- 576030 words of memory out of 3000000
- 31978 multiletter control sequences out of 15000+600000
- 458314 words of font info for 122 fonts, out of 8000000 for 9000
+ 14469 strings out of 478659
+ 243264 string characters out of 2845920
+ 569768 words of memory out of 3000000
+ 32013 multiletter control sequences out of 15000+600000
+ 458325 words of font info for 122 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,7n,77p,1015b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
 {C:/Users/varun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C
@@ -1053,11 +974,11 @@ arun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/va
 run/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/va
 run/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/va
 run/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on STA380_Exercises.pdf (43 pages, 5346455 bytes).
+Output written on STA380_Exercises.pdf (35 pages, 5022143 bytes).
 PDF statistics:
- 728 PDF objects out of 1000 (max. 8388607)
- 140 named destinations out of 1000 (max. 500000)
- 31158 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 777 PDF objects out of 1000 (max. 8388607)
+ 175 named destinations out of 1000 (max. 500000)
+ 31265 words of extra memory for PDF output out of 35830 (max. 10000000)
 
 
 ! pdflatex: major issue: So far, you have not checked for MiKTeX updates.
