@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 \newcommand{\blandscape}{\begin{landscape}}
 \newcommand{\elandscape}{\end{landscape}}
 
+Link to the GitHub: https://github.com/VarunKausika/STA-380-Exercises
 \section{1. Probability practice}
 
 \subsection{Part A}
@@ -694,7 +695,6 @@ wine = rename(wine, Show = Row.names)
 
 ```{r echo=FALSE}
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-
 ```
 
 ```{r plot19, fig.cap="PC space, i.e. the space of summary variables we've created", fig.height=3, echo=FALSE}
@@ -1029,4 +1029,243 @@ ggplot(social_cluster1_main, aes(x =reorder(type, -Cluster_10) , y=Cluster_10)) 
 
 K-Means clustering can allow us to identify the different market segments. In this case, we used 10 clusters to describe the unique market segments that the dataset has. These can then be used to create marketing campaigns. 
 
+\section{8. Reuters Corpus}
+
+```{r, message=FALSE}
+library(tm) 
+library(tidyverse)
+library(slam)
+library(proxy)
+```
+\begin{enumerate}
+\item What question are we trying to answer - What topics does Bernard Hickey write about?
+\item What statistical tool did we use to answer the question - We calculated tf-idf scores of each of the words in the document, then used those scores to perform a PCA and then clustered the documents based on similar topics and visulized it in a dendrogram.
+\item Results: What evidence/results did your approach provide to answer the questions? 
+\begin{itemize}
+\item We obtained 5 major clusters and categorized all of Bernard's documents in those clusters. 
+\item Then we looked at the documents in each cluster and found what topics each cluster represents.
+\end{itemize}
+\item Conclusion: What are your conclusions about your questions? Provide a written interpretation of your results, understandable to stakeholders who might plausibly take an interest in this data set. - Bernard mostly writes about financials of companies, mergers and acquisitions, business and investing, politics and media.
+\end{enumerate}
+ 
+\subsection{Preprocessing steps}
+1. Created a reader function to read documents.
+2. Take out the second part of the file name and rename the files.
+3. Create a corpus.
+4. pre-processing/tokenization steps.
+5. Removing stopwords.
+6. Creating a doc-term-matrix.
+7. Inspecting its entries.
+
+```{r}
+readerPlain = function(fname){
+				readPlain(elem=list(content=readLines(fname)), 
+							id=fname, language='en') }
+							
+```
+
+```{r warning=FALSE}
+file_list = Sys.glob('BernardHickey/*.txt')
+bernard = lapply(file_list, readerPlain) 
+```
+
+```{r, warning=FALSE, results='hide'}
+file_list
+mynames = file_list %>%
+	{ strsplit(., '/', fixed=TRUE) } %>%
+	{ lapply(., tail, n=2) } %>%
+	{ lapply(., paste0, collapse = '') } %>%
+	unlist
+```
+```{r, results='hide'}
+mynames
+names(bernard) = mynames
+```
+
+```{r}
+documents_raw = Corpus(VectorSource(bernard))
+```
+
+```{r, warning=FALSE}
+my_documents = documents_raw
+my_documents = tm_map(my_documents, content_transformer(tolower)) # make everything lowercase
+my_documents = tm_map(my_documents, content_transformer(removeNumbers)) # remove numbers
+my_documents = tm_map(my_documents, content_transformer(removePunctuation)) # remove punctuation
+my_documents = tm_map(my_documents, content_transformer(stripWhitespace)) ## remove excess white-space
+```
+
+```{r, results = 'hide', warning=FALSE}
+stopwords("en")
+stopwords("SMART")
+?stopwords
+my_documents = tm_map(my_documents, content_transformer(removeWords), stopwords("en"))
+```
+\subsection{Basic summary statistics of documents}
+```{r}
+DTM_bernard = DocumentTermMatrix(my_documents)
+DTM_bernard # some basic summary statistics
+```
+
+```{r, results='hide'}
+class(DTM_bernard)  # a special kind of sparse matrix format
+```
+**Inspecting the DTM**
+```{r}
+inspect(DTM_bernard[1:10,1:20])
+```
+\subsection{Finding frequently used terms}
+```{r}
+knitr::kable(findFreqTerms(DTM_bernard, 50), caption="Frequent terms")
+
+```
+
+**Further pre-processing steps**
+1. Drop those terms that only occur in one or two documents.
+2. Construct tf-idf weights.
+
+```{r, results='hide'}
+DTM_bernard = removeSparseTerms(DTM_bernard, 0.95)
+DTM_bernard # now ~ 1000 terms (versus ~3000 before)
+```
+```{r}
+tfidf_bernard = weightTfIdf(DTM_bernard)
+
+```
+
+\subsection{Comparing Documents}
+
+Here, we observe term weights in the first document.
+```{r}
+inspect(tfidf_bernard[1,])
+```
+
+Now, we compare this with the actual content of the first document.
+```{r}
+knitr::kable(content(bernard[[1]]), caption="Document 1")
+```
+
+\subsection{Dimensionality reduction}
+
+We performed PCA on the tf-idf scores.
+```{r plot40, fig.cap="The first 2 principal components seem to retain most of the variance of the data.", fig.height=3}
+X = as.matrix(tfidf_bernard)
+summary(colSums(X))
+scrub_cols = which(colSums(X) == 0)
+X = X[,-scrub_cols]
+
+pca_bernard = prcomp(X, rank=2, scale=TRUE)
+plot(pca_bernard) 
+```
+**Loadings of PCA**
+```{r, results='hide'}
+pca_bernard$rotation[order(abs(pca_bernard$rotation[,1]),decreasing=TRUE),1][1:25]
+pca_bernard$rotation[order(abs(pca_bernard$rotation[,2]),decreasing=TRUE),2][1:25]
+```
+We filter our dataset to represent each document with just 2 numbers from PCA.
+```{r plot41, fig.cap="There are 5 clear clusters, most of the documents seem to fall in the third.", results='hide', fig.height=3}
+pca_bernard$x[,1:2]
+
+plot(pca_bernard$x[,1:2], xlab="PCA 1 direction", ylab="PCA 2 direction", bty="n",
+     type='n')
+text(pca_bernard$x[,1:2], labels = 1:length(bernard), cex=0.7)
+```
+\subsection{Comparing documents in clusters}
+
+**"Boosting revenue" topic - document 48 and 50**
+```{r}
+knitr::kable(content(bernard[[48]]), caption="Document 48")
+knitr::kable(content(bernard[[50]]), caption="Document 50")
+```
+
+**"Mergers/Acquisitions" topic - document 28 and 29**
+```{r}
+knitr::kable(content(bernard[[28]]), caption="Document 28")
+knitr::kable(content(bernard[[29]]), caption="Document 29")
+```
+
+**"Australia-Murdoch media coverage" topic - documents 9 and 10**
+```{r}
+knitr::kable(content(bernard[[9]]), caption="Document 9")
+knitr::kable(content(bernard[[10]]), caption="Document 10")
+```
+
+**Conclusion: even just these two-number summaries still preserve a lot of information**
+
+\subsection{Cluster documents}
+Here we use hierarchical clustering to plot a dendrogram according to the PCA scores calculated earlier.
+
+```{r plot42, fig.cap="Document 7 doesn't seem to relate to any of the other documents.", fig.height=3}
+# pca_bernard$x
+dist_mat = dist(pca_bernard$x)
+# dist_mat
+tree_bernard = hclust(dist_mat)
+plot(tree_bernard)
+clust5 = cutree(tree_bernard, k=5)
+```
+\subsection{Inspect the clusters}
+Both documents belong to the Merger topic.
+```{r, results=FALSE}
+which(clust5 == 3)
+
+knitr::kable(content(bernard[[16]]), caption="Document 16")
+knitr::kable(content(bernard[[18]]), caption="Document 18")
+
+```
+
+\section{9. Association Rules Mining}
+
+\subsection{Approach}
+\begin{enumerate}
+\item Before finding interesting association rules, we plotted the frequency of the top 10 items in all baskets. We can see that whole milk, other vegetables, and rolls/buns are the most frequent items in all baskets. For the apriori algorithm, we used a support of 0.005, confidence of 0.25 and then examined those that had a lift greater than 3. The support and confidence were chosen through trial and error of seeing the number of rules different values result in. A lift of 3 was chosen in order to only examine rules that lead to a higher probability of occurrence. After obtaining the rules using these thresholds, we visualized them in the network shown below. The areas of concentrated blue where whole milk appears to be the central node to a variety of vegetables and fruits is representative of the fact that these grocery items are frequently purchased together and with many other items (other nodes).
+\item To look further into this, we sorted the rules by confidence and lift separately. We found that any time vegetables, fruit, and dairy products are purchased, the lift for whole milk was greater than 2.5. This means that the probability someone purchases whole milk increases if they are purchasing fresh produce and dairy products. We also see that the probability of purchasing vegetables increases if someone is already purchasing vegetables of a different kind. With respect to all dairy products, the probability of purchasing them increases when someone is purchasing fruit, which could be indicative of people making fruit smoothies or putting fruits in their yogurt.
+\item Overall, the top 30 rules sorted by confidence and lift make sense since these groceries are considered essential to cook any meal and some are even complementary goods (i.e. fruit and yogurt, rolls/buns and sausage). Additionally, these rules can be used by grocery stores to increase sales by placing these products near each other. In fact, they are probably already using these rules to their advantage!
+\end{enumerate}
+
+```{r grocery, echo=FALSE, message=FALSE, warning=FALSE, fig.cap = "Plot of the item frequency of groceries in all baskets. Whole milk, other vegetables, and rolls/buns are the most frequently occuring items in baskets."}
+library(igraph)
+library(arules)
+library(arulesViz)
+
+# load in the data as transactions class
+grocery_raw = read.transactions('groceries.txt', sep=',')
+
+# plot the items and their frequencies
+itemFrequencyPlot(grocery_raw, topN=10)
+```
+
+
+```{r apri, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# run apriori algorithm with limits
+grocery_rules = apriori(grocery_raw, parameter=list(support=0.005, confidence=0.25, minlen = 2))
+
+# graph based visualization
+grocery_graph = associations2igraph(subset(grocery_rules, subset = lift > 3), associationsAsNodes = FALSE)
+igraph::write_graph(grocery_graph, file='groceries.graphml', format = "graphml")
+
+
+```
+
+```{r all, echo=FALSE, message=FALSE, warning=FALSE, fig.cap = "Network of grocery rules that have a support of 0.005, confidence of 0.25, and lift greater than 3. Concentration of blue coloring near whole milk and various fruit and vegetables indicates a co-occurence pattern.", fig.height=2}
+# insert network from gephi
+# error_file = magick::image_read("grocery_rules_lift.png")
+# right_png = magick::image_convert(error_file, "png")
+# magick::image_write(right_png, path = "grocery_rules_lift.png", format = "png")
+knitr::include_graphics("grocery_rules_lift.png")
+```
+
+
+```{r conf, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Network of the top 30 grocery rules sorted according to confidence. Displays the idea that the probability of purchasing whole milk increases with the purchase of fruit and vegetables.", fig.height=2}
+# find the rules with the most confidence
+conf = sort(grocery_rules, by="confidence")[1:30]
+
+# graph based visualization
+conf_graph = associations2igraph(conf, associationsAsNodes = FALSE)
+igraph::write_graph(conf_graph, file='conf.graphml', format = "graphml")
+
+# insert network from gephi
+# error_file = magick::image_read("conf_graph.png")
+# right_png = magick::image_convert(error_file, "png")
+# magick::image_write(right_png, path = "conf_graph.png", format = "png")
+knitr::include_graphics("conf_graph.png")
+```
 
