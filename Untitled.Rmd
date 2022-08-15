@@ -1,0 +1,15 @@
+---
+title: "STA-380 Exercises"
+output: 
+  pdf_document:
+    extra_dependencies: ["float"]
+date: "2022-08-10"
+author: "Varun Kausika, Khyati Jariwala, Aishwarya Rajeev, Juhi Patel"
+header-includes:
+ \usepackage{float}
+ 
+---
+
+
+
+
